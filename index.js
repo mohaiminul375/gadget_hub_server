@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 3000;
 const cors = require("cors");
-require('dotenv').config()
+require("dotenv").config();
 const { MongoClient, ServerApiVersion } = require("mongodb");
 // cors origin
 const corsOptions = {
@@ -15,9 +15,7 @@ app.use(cors(corsOptions));
 
 // mongodb
 
-
-const uri =
-  `mongodb+srv://${process.env.DB_User}:${process.env.DB_PASS}@cluster0.ixszr3u.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+const uri = `mongodb+srv://${process.env.DB_User}:${process.env.DB_PASS}@cluster0.ixszr3u.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
@@ -33,6 +31,20 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     // await client.connect();
     // Send a ping to confirm a successful connection
+
+    //data collection
+    // all-product
+    const productCollection = client.db("gadget-hub").collection("all-product");
+
+    // get
+
+    // all-product
+
+    app.get("/products", async(req, res) => {
+      const allProduct =await productCollection.find().toArray();
+      res.send(allProduct);
+    });
+
     await client.db("admin").command({ ping: 1 });
     console.log(
       "Pinged your deployment. You successfully connected to MongoDB!"
