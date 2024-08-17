@@ -40,8 +40,39 @@ async function run() {
 
     // all-product
 
-    app.get("/products", async(req, res) => {
-      const allProduct =await productCollection.find().toArray();
+    app.get("/products", async (req, res) => {
+      // query
+      const search = req.query.name;
+      const sorted_date = req.query.sort_date;
+      const sorted_price = req.query.sort_price;
+      console.log(search);
+      // search
+      let query = {};
+      if (search) {
+        query.name = { $regex: search, $options: "i" }; 
+        console.log(search);
+      }
+      // sort option
+      let sortOption = {};
+
+      //  sorting by date
+      if (sorted_date == "newest_first") {
+        sortOption.createdAt = -1;
+      } else if (sorted_date == "older_first") {
+        sortOption.createdAt = 1;
+      }
+
+      // sorting by price
+      if (sorted_price == "low_to_high") {
+        sortOption.price = 1;
+      } else if (sorted_price == "high_to_low") {
+        sortOption.price = -1;
+      }
+
+      const allProduct = await productCollection
+        .find(query)
+        .sort(sortOption)
+        .toArray();
       res.send(allProduct);
     });
 
