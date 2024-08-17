@@ -6,7 +6,11 @@ require("dotenv").config();
 const { MongoClient, ServerApiVersion } = require("mongodb");
 // cors origin
 const corsOptions = {
-  origin: ["http://localhost:5173", "http://localhost:5174"],
+  origin: [
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "https://gadget-hub-375.web.app",
+  ],
 };
 
 // middleware
