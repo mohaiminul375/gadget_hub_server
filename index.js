@@ -45,11 +45,13 @@ async function run() {
       const search = req.query.name;
       const sorted_date = req.query.sort_date;
       const sorted_price = req.query.sort_price;
-      console.log(search);
+      // pagination
+      const page = parseInt(req.query.page) - 1;
+      const size = parseInt(req.query.size);
       // search
       let query = {};
       if (search) {
-        query.name = { $regex: search, $options: "i" }; 
+        query.name = { $regex: search, $options: "i" };
         console.log(search);
       }
       // sort option
@@ -71,6 +73,8 @@ async function run() {
 
       const allProduct = await productCollection
         .find(query)
+        .skip(page * size)
+        .limit(size)
         .sort(sortOption)
         .toArray();
       res.send(allProduct);
