@@ -21,14 +21,18 @@
     ```
 
 3. **Set Up Environment Variables**: Create a `.env.local` file in the root directory and add the necessary environment variables. (**Important!**)
-
+`Example:`
+```sh
+PORT=3000
+MONGODB_URI=your-mongodb-connection-string
+```
 4. **Run the Application**:
 
     ```sh
-    npm run dev -- --host
+    nodemon index.js
     ```
 
-5. **Access the Site**: Open your browser and go to `http://localhost:5173/` or `http://192.168.1.12:5173/` from other devices on the same network to view the application.
+5. **Access the Site**: Open your browser and go to `http://localhost:3000/` from other devices on the same network to view the application.
 
 
 # website features
@@ -42,19 +46,13 @@
 - Express.js, MongoDB(back-end)
 - Firebase(Authentication)
 - Firebase,Vercel(host)
-# npm and Packages
-- vite
-- react
-- react router dom
-- tailwind css
-- daisyUI
-- Meraki UI
-- react spinner
-- react icons
-- firebase
-- react hot toast
+# npm and Packages(Backend)
+- express
+- mongoDB
+- cors
+- dotenv
 # server Link
-#  https://github.com/mohaiminul375/gadget_hub_server
+#  https://github.com/mohaiminul375/gadget_hub_client
 
 
 
